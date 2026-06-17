@@ -25,15 +25,7 @@ pen = create_pen()
 
 def draw_walls():
     """
-    Рисуем стены (0,0)
-             y
-             ↑
-             |
-       (-x)  |  (+x)
-    ---------0----------→ x
-             |
-             |
-            (-y)
+    Рисуем стены
     """
     for x,y,w,h in WALLS:
         pen.goto(x,y)
@@ -59,6 +51,7 @@ def move(new_x, new_y):
     # Проверяем победу
     if player.distance(finish) < 20:
         print('Победа, ты добрался до финиша')
+        turtle.bye()
 
 def move_up():
     move(player.xcor(), player.ycor() + STEP)
