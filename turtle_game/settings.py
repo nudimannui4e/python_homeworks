@@ -9,6 +9,11 @@ PLAYER_COLOR = '#FF5672'
 PLAYER_SPEED = 10
 PLAYER_START = (-250, -250)
 
+ENEMY_SPEED = 3
+ENEMY_SHAPE = 'circle'
+ENEMY_COLOR = 'red'
+ENEMY_START = (160, -150)
+
 WALLS = [
     # x     y     w   h
     (-160, -200, 360, 20),

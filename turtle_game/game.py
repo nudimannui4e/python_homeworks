@@ -1,13 +1,15 @@
 import turtle
+import math
 
 from settings import (
     WINDOW_HEIGHT, WINDOW_WIDTH,
     WINDOW_TITLE, WINDOW_BG_COLOR,
     WALLS,
-    STEP
+    STEP,
+    ENEMY_SPEED
 )
 
-from entities import create_player, create_finish, create_pen
+from entities import create_player, create_finish, create_pen, create_enemy
 
 # создание экрана
 wn = turtle.Screen()
@@ -22,6 +24,7 @@ wn.setup(
 player = create_player()
 finish = create_finish()
 pen = create_pen()
+enemy = create_enemy()
 
 def draw_walls():
     """
@@ -40,6 +43,15 @@ def draw_walls():
 
         pen.end_fill()
         pen.penup()
+
+
+def is_wall(x, y):
+    # проверяем, врезался ли игрок в стену
+    for wx, wy, w, h in WALLS:
+        if wx <= x <= wx + w and wy <= y <= wy + h:
+            return True
+        return False
+
 
 def move(new_x, new_y):
     # Проверяем, не врезаемся ли в стену
@@ -75,4 +87,23 @@ def bind_keys():
 def run():
     draw_walls()
     bind_keys()
+    move_enemy()
     wn.mainloop()
+
+def move_enemy():
+    dx = player.xcor() - enemy.xcor()
+    dy = player.ycor() - enemy.ycor()
+    distance = math.sqrt(dx * dx + dy * dy)
+
+    if distance > 0:
+        step_x = ENEMY_SPEED * dx / distance
+        step_y = ENEMY_SPEED * dy / distance
+        new_x  = enemy.xcor() + step_x
+        new_y  = enemy.ycor() + step_y
+
+        if not is_wall(new_x, new_y):
+            enemy.goto(new_x, new_y)
+
+    if enemy.distance(player) < 20:
+        print('Враг тебя поймал')
+        wn.bye()
