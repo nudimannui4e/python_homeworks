@@ -31,7 +31,7 @@ def process_anfisa(query):
         cities_string = ''
         for cities in DATABASE.values():
             cities_string += f'{cities} '
-        return ('Твои друзья в городах:', cities_string)
+        return 'Твои друзья в городах:' + cities_string
     else:
         return ('Твои друзья: Серёга Соня Миша Дима Алина Егор Коля')
 
