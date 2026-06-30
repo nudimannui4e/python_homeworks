@@ -39,8 +39,8 @@ def create_enemy():
     enemy.shape(ENEMY_SHAPE)
     enemy.color(ENEMY_COLOR)
     enemy.penup()
-    enemy.speed(20)
+    enemy.speed(0)
     enemy.goto(ENEMY_START)
-
+    enemy_speed = 3
 
     return enemy
